@@ -1,0 +1,68 @@
+extends ./layout.pug
+block style
+	link(href="../css/style.css", rel="stylesheet")
+	meta(http-equiv="Content-Type" content="text/html" charset="utf-8")
+block content
+	p
+	form(action='/catalog', method="POST")
+		select(name="menu" size="1")
+			option(value=1) 
+					p= 'Все'
+			each cat in categories
+				option(value=cat.name) 
+					p= cat.name
+		select(name="view" size="1")
+				option(value=1) 
+					p= 'Все'
+				option(value='заказ') 
+					p= 'заказ'
+				option(value='предложение') 
+					p= 'предложение'
+		select(name="status" size="1")
+				option(value= 1) 
+					p= 'Все'
+				option(value='продается') 
+					p= 'продается'
+				option(value='продано') 
+					p= 'продано'
+		select(name="type" size="1")
+			option(value=1) 
+				p= 'Все'
+			option(value='готовая') 
+				p= 'готовая'
+			option(value= 'заказ') 
+				p= 'на заказ'
+		input(type="submit" float=right name="sort" value="Фильтр")
+		p Город: 	 
+			input(type="text" name="city")
+	.pr
+		ul
+			each product in products
+					li
+						.licat
+							a(href='/product/'+product._id )
+								section
+									table.tour
+										tr
+											th.t1
+												h2
+													h2= product.name
+												
+												img.leftfoto.product2(width="85%" src="./images/"+product.image alt="product")
+											td.t2
+												-if(product.city!='null') 
+													p= 'Город: '+ product.city
+												-if(product.price!='0') 
+													p= 'Цена: '
+														strong= product.price+' руб.'
+												p= 'Категория: '
+													strong= product.type
+												p= 'Вид товара: '
+													strong= product.view
+												p= product.category
+												p
+												p
+												.basic
+												p= 'Дата размещения товара:  '+product.date.getDate() + '/' + product.date.getMonth()+1 + '/' + product.date.getFullYear()
+												
+					hr

@@ -1,0 +1,115 @@
+extends ./layout.pug
+block style
+	link(href="../css/style.css", rel="stylesheet")
+	meta(http-equiv="Content-Type" content="text/html" charset="utf-8")
+block content
+	form( action='/signup',method='get')
+		h2= massage
+	p
+		-if(status==='edit')
+			form( action='/signup/page',method='POST')
+				p Имя: 	 
+					input(type="text" name="firstname" value=user.firstname required)
+				p Фамилия:  
+					input(type="text" name="lastname" value=user.secondname required)
+				p Пароль:  
+					input(type="password" name="pwd"  required)
+				p Повторите пароль: 
+					input(type="password" name="pwd2" required)
+				p Логин:  
+					input(type="text" name="username" value=user.username required)
+				p E-mail:  	 
+					input(type="emile" name="email" value=user.email required)
+				p Город:  	 
+					input(type="text" name="city" value=user.city required)
+				p Телефон:  
+					input(type="tel" name="number" value=user.number required)
+				p 
+					h4 Пол
+					.b-form__checkbox
+						-if(user.male==='man') 
+							input(id="ch1" type="radio" name="sex" value="man" checked)
+							label(for="ch1") Мужской
+							br
+							input(id="ch2" type="radio" name="sex" value="woman")
+							label(for="ch2") Женский
+							br
+						-else
+							input(id="ch1" type="radio" name="sex" value="man" )
+							label(for="ch1") Мужской
+							br
+							input(id="ch2" type="radio" name="sex" value="woman" checked)
+							label(for="ch2") Женский
+				p 
+					
+					h4 Тип пользователя
+					-if(user.type==='master') 
+						input(id="ch3" type="radio" name="type" value="master" checked)
+						label(for="ch3") Мастер
+						br 
+						input(id="ch4" type="radio" name="type" value="user" )
+						label(for="ch4") Покупатель
+						br
+					-else
+						input(id="ch3" type="radio" name="type" value="master")
+						label(for="ch3") Мастер
+						br 
+						input(id="ch4" type="radio" name="type" value="user" checked)
+						label(for="ch4") Покупатель
+						br
+				p Обо мне:  	 
+				p
+					textarea(name="about" placeholder=user.about cols=50 rows=5 style="resize: none;")
+				p Фото: 	 
+					input(type="text" name="image" value=user.image) 
+				p 
+					div(align="center" )
+						input(align="right" type="submit" value="Сохранить")
+			-if(message!='null')
+				h4= message
+		-else
+			form( action='/signup',method='POST')
+				p Имя: 	 
+					input(type="text" name="firstname" required)
+				p Фамилия:  
+					input(type="text" name="lastname" required)
+				p Пароль:  
+					input(type="password" name="pwd" required)
+				p Повторите пароль: 
+					input(type="password" name="pwd2" required)
+				p Логин:  
+					input(type="text" name="username" required)
+				p E-mail:  	 
+					input(type="emile" name="email" required)
+				p Город:  	 
+					input(type="text" name="city" required)
+				p Телефон:  
+					input(type="tel" name="number" required)
+				p 
+					h4 Пол
+					.b-form__checkbox
+						input(id="ch1" type="radio" name="sex" value="man")
+						label(for="ch1") Мужской
+						br
+						input(id="ch2" type="radio" name="sex" value="woman")
+						label(for="ch2") Женский
+						br
+				p 
+					h4 Тип пользователя
+		
+					input(id="ch3" type="radio" name="type" value="master" )
+					label(for="ch3") Мастер
+					br 
+					input(id="ch4" type="radio" name="type" value="user" selected=true)
+					label(for="ch4") Покупатель
+					br
+				p Обо мне:  	 
+					p
+						textarea(name="about" cols=50 rows=5 style="resize: none;")
+				p Фото: 	 
+					input(type="text" name="image") 
+				p 
+					div(align="center" )
+						input(align="right" type="submit" value="Сохранить")
+			-if(message!='null')
+				h4= message
